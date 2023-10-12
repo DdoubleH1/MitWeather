@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">MitWeather</string>
+    <string name="title_libraries">core</string>
+    <string name="enter_a_location">Enter a location</string>
+    <string name="add_to_list">Add to list</string>
+    <string name="remove_from_list">Remove from list</string>
+    <string name="_5_day_forecast">5-DAY FORECAST</string>
+    <string name="visibility">Visibility</string>
+    <string name="feels_like">Feels like</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind">Wind</string>
+    <string name="current_temp">%1$s\u00B0</string>
+    <string name="high_low_temp">H: %1$s\u00B0  L: %2$s\u00B0</string>
+    <string name="km_h">%1$s km/h</string>
+    <string name="km">%1$s km</string>
+<!--    <string name="percentage">%1$s /%</string>-->
+</resources>

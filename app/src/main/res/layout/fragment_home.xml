@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_home"
+        android:orientation="vertical"
+        tools:context=".ui.home.HomeFragment">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/location_searchView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_bar_height"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="50dp"
+            android:theme="@style/AppSearchView"
+            app:iconifiedByDefault="false"
+            app:queryHint="@string/enter_a_location"
+            app:searchIcon="@drawable/ic_search" />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_locations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                />
+        </ScrollView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>
+
