@@ -11,16 +11,29 @@
         android:orientation="vertical"
         tools:context=".ui.home.HomeFragment">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/location_searchView"
+<!--        <androidx.appcompat.widget.SearchView-->
+<!--            android:id="@+id/location_searchView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/search_bar_height"-->
+<!--            android:layout_marginHorizontal="20dp"-->
+<!--            android:layout_marginTop="50dp"-->
+<!--            android:theme="@style/AppSearchView"-->
+<!--            app:iconifiedByDefault="false"-->
+<!--            app:queryHint="@string/enter_a_location"-->
+<!--            app:searchIcon="@drawable/ic_search" />-->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/search_bar_height"
+            android:layout_height="50dp"
+            app:cardBackgroundColor="@color/transparent"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="50dp"
-            android:theme="@style/AppSearchView"
-            app:iconifiedByDefault="false"
-            app:queryHint="@string/enter_a_location"
-            app:searchIcon="@drawable/ic_search" />
+            android:layout_marginTop="50dp">
+
+        <androidx.fragment.app.FragmentContainerView android:id="@+id/autocomplete_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            />
+        </androidx.cardview.widget.CardView>
 
 
         <ScrollView
