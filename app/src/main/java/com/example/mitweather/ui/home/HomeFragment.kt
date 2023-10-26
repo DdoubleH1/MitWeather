@@ -1,5 +1,6 @@
 package com.example.mitweather.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -7,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mitweather.BuildConfig
 import com.example.mitweather.R
 import com.example.mitweather.adapter.LocationAdapter
 import com.example.mitweather.adapter.OnItemClickListener
@@ -18,6 +20,14 @@ import com.example.mitweather.databinding.LayoutLocationItemBinding
 import com.example.mitweather.navigation.AppNavigation
 import com.example.mitweather.utils.Constants
 import com.example.mitweather.utils.Geocode
+import com.google.android.gms.common.api.Status
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteFragment
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -36,12 +46,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     private var geocode: Geocode = Geocode()
     private var coordinates: Map<String, Double?> = mapOf()
 
+
 //    private val locationAdapter = LocationAdapter(, this)
 
+
+    override fun initView(savedInstanceState: Bundle?) {
+        super.initView(savedInstanceState)
+
+
+    }
     override fun bindingStateView() {
         super.bindingStateView()
 //        binding.rcvLocations.adapter = locationAdapter
         binding.rcvLocations.layoutManager = LinearLayoutManager(context)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
     }
 
     override fun bindingAction() {
@@ -71,6 +93,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         bundle.putDouble(Constants.BUNDLE_LONGITUDE, location.lon)
         bundle.putDouble(Constants.BUNDLE_LATITUDE, location.lat)
     }
+
+
 
 
 }

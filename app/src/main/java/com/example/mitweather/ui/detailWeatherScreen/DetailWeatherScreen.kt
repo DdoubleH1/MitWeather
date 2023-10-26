@@ -142,6 +142,7 @@ class DetailWeatherScreen:
             when (item.itemId) {
                 R.id.add_to_list -> {
                     viewModel.onEvent(ContactEvent.AddToList(Location(longitude, latitude, currentWeather.data.name, null)), requireContext())
+                    appNavigation.openDetailToHome(bundle)
                     true
                 }
 
