@@ -13,8 +13,10 @@ class AppNavigationImpl @Inject constructor() : BaseNavigatorImpl(), AppNavigati
     override fun openSplashToHome(bundle: Bundle?) {
         openScreen(R.id.action_splashFragment_to_homeFragment, bundle)
     }
-
     override fun openHomeToDetail(bundle: Bundle?) {
         openScreen(R.id.action_homeFragment_to_detailWeatherScreen, bundle)
+    }
+    override fun openDetailToHome(bundle: Bundle?) {
+        openScreen(R.id.action_detailWeatherScreen_to_homeFragment, bundle)
     }
 }

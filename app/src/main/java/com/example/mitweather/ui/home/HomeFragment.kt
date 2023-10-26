@@ -35,16 +35,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     private var bundle: Bundle = Bundle()
     private var geocode: Geocode = Geocode()
     private var coordinates: Map<String, Double?> = mapOf()
-    private val dataset: List<Location> = listOf(
-        Location(0.0, 0.0, "Ha Noi", null),
-        Location(1.0, 0.0, "Hai Phong", null),
-        Location(2.0, 0.0, "Da Nang", null)
-    )
-    private val locationAdapter = LocationAdapter(dataset, this)
+
+//    private val locationAdapter = LocationAdapter(, this)
 
     override fun bindingStateView() {
         super.bindingStateView()
-        binding.rcvLocations.adapter = locationAdapter
+//        binding.rcvLocations.adapter = locationAdapter
         binding.rcvLocations.layoutManager = LinearLayoutManager(context)
     }
 
@@ -72,7 +68,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     }
 
     private fun prepareBundle(location: Location) {
-        bundle.putParcelable(Constants.BUNDLE_LOCATION, location)
+        bundle.putDouble(Constants.BUNDLE_LONGITUDE, location.lon)
+        bundle.putDouble(Constants.BUNDLE_LATITUDE, location.lat)
     }
 
 

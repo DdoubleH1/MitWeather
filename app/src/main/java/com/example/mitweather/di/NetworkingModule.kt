@@ -1,6 +1,6 @@
 package com.example.mitweather.di
 
-import com.example.mitweather.network.CurrentWeatherApi
+import com.example.mitweather.network.WeatherApiService
 import com.example.mitweather.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -22,7 +22,7 @@ class NetworkingModule {
     }
 
     @Provides
-    fun provideCurrentWeatherApi(retrofit: Retrofit): CurrentWeatherApi {
-        return retrofit.create(CurrentWeatherApi::class.java)
+    fun provideWeatherApiService(retrofit: Retrofit): WeatherApiService {
+        return retrofit.create(WeatherApiService::class.java)
     }
 }

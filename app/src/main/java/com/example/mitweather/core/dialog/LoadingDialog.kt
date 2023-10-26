@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import com.example.mitweather.R
 import java.lang.ref.WeakReference
 
-class LoadingDialog private constructor(private var mActivity: Activity?) {
+class LoadingDialog(private var mActivity: Activity?) {
 
     private var isShow = false
     private lateinit var dialog: AlertDialog

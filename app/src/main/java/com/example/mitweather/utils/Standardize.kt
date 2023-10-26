@@ -16,7 +16,7 @@ object Standardize {
         return kelvin - 273.15
     }
 
-    fun standardizeMeterToKilometer(meter: Int): Int {
+    fun standardizeMeterToKilometer(meter: Long): Long {
         return meter / 1000
     }
 }

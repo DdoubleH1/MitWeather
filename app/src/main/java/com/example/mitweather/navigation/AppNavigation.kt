@@ -8,4 +8,6 @@ interface AppNavigation : BaseNavigator {
    fun openSplashToHome(bundle: Bundle? = null)
 
    fun openHomeToDetail(bundle: Bundle? = null)
+
+   fun openDetailToHome(bundle: Bundle? = null)
 }

@@ -1,21 +1,38 @@
 package com.example.mitweather.data.model
 
-import android.os.Parcel
-import android.os.Parcelable
+import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
+
+
+private val gson = Gson()
 
 data class CurrentWeather(
-    val base: String?,
-    val clouds: Clouds,
-    val cod: Int,
     val coord: Coord,
-    val dt: Int,
-    val id: Int,
-    val main: Main,
-    val name: String?,
+    val weather: List<Weather>,
+    val base: String,
+    val main: MainWeather,
+    val visibility: Long,
+    val wind: Wind,
+    val clouds: Clouds,
+    val dt: Long,
     val sys: Sys,
-    val timezone: Int,
-    val visibility: Int,
-    val weather: List<WeatherX>,
-    val wind: Wind
-)
+    val timezone: Long,
+    val id: Long,
+    val name: String,
+    val cod: Long
+) {
+    public fun toJson() = gson.toJson(this)
+
+    companion object {
+        public fun fromJson(json: String) = gson.fromJson(json, Weather::class.java)
+    }
+}
+
+
+
+
+
+
+
+
 
