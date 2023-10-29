@@ -11,6 +11,7 @@
         android:orientation="vertical"
         tools:context=".ui.home.HomeFragment">
 
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/location_searchView"
             android:layout_width="match_parent"
@@ -21,7 +22,6 @@
             app:iconifiedByDefault="false"
             app:queryHint="@string/enter_a_location"
             app:searchIcon="@drawable/ic_search" />
-
 
 
         <ScrollView
@@ -38,6 +38,7 @@
                 />
         </ScrollView>
 
+<include layout="@layout/layout_loading" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </layout>

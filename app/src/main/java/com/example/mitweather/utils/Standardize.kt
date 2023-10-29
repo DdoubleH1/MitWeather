@@ -12,8 +12,8 @@ object Standardize {
         return result
     }
 
-    fun standardizeDegreeCelsius(kelvin: Double): Double {
-        return kelvin - 273.15
+    fun standardizeDegreeCelsius(kelvin: Double): String {
+        return (kelvin - 273.15).toInt().toString() + "°"
     }
 
     fun standardizeMeterToKilometer(meter: Long): Long {

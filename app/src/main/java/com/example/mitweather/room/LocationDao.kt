@@ -1,7 +1,6 @@
-package com.example.mitweather.database
+package com.example.mitweather.room
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -17,5 +16,5 @@ interface LocationDao {
     suspend fun deleteLocation(longitude: Double, latitude: Double)
 
     @Query("SELECT * FROM location_table")
-    fun getAllLocation(): Flow<List<Location>>
+    fun getAllLocation(): MutableList<Location>
 }

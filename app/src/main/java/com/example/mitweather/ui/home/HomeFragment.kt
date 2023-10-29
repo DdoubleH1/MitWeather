@@ -1,35 +1,23 @@
 package com.example.mitweather.ui.home
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mitweather.BuildConfig
 import com.example.mitweather.R
 import com.example.mitweather.adapter.LocationAdapter
 import com.example.mitweather.adapter.OnItemClickListener
 import com.example.mitweather.core.base.BaseFragment
-import com.example.mitweather.data.model.CurrentWeather
 import com.example.mitweather.data.model.Location
 import com.example.mitweather.databinding.FragmentHomeBinding
 import com.example.mitweather.databinding.LayoutLocationItemBinding
 import com.example.mitweather.navigation.AppNavigation
 import com.example.mitweather.utils.Constants
 import com.example.mitweather.utils.Geocode
-import com.google.android.gms.common.api.Status
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.widget.AutocompleteFragment
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.example.mitweather.utils.MyResponse
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -45,6 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     private var bundle: Bundle = Bundle()
     private var geocode: Geocode = Geocode()
     private var coordinates: Map<String, Double?> = mapOf()
+    private lateinit var locationList: MutableList<Location>
 
 
 //    private val locationAdapter = LocationAdapter(, this)
@@ -52,19 +41,38 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
+        viewModel.apply {
+            getAllLocation()
+            locationListResponse.observe(viewLifecycleOwner) { list ->
+                Log.e("HomeFragment", "initView: $list")
+                locationList = list
+                getCurrentWeatherOfLocationList()
+            }
+            isLoadingDataComplete.observe(viewLifecycleOwner) { isComplete ->
+                when (isComplete) {
+                    true -> {
+                        Log.e("HomeFragment", "initView: Success")
+                        Log.e("HomeFragment", "initView: $locationList")
+                        binding.rcvLocations.apply {
+                            layoutManager = LinearLayoutManager(context)
+                            adapter = LocationAdapter(locationList, this@HomeFragment)
+                        }
+                    }
 
+                    else -> {
+                        Log.e("HomeFragment", "initView: Loading")
+                    }
+                }
+            }
+        }
 
     }
+
     override fun bindingStateView() {
         super.bindingStateView()
-//        binding.rcvLocations.adapter = locationAdapter
-        binding.rcvLocations.layoutManager = LinearLayoutManager(context)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
 
     }
+
 
     override fun bindingAction() {
         super.bindingAction()
@@ -94,7 +102,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         bundle.putDouble(Constants.BUNDLE_LATITUDE, location.lat)
     }
 
-
-
-
+    private fun getCurrentWeatherOfLocationList() {
+        lifecycleScope.launch {
+            for (location in locationList) {
+                val currentWeather =
+                    viewModel.getCurrentWeather(location.lat, location.lon) as MyResponse.Success
+                location.currentWeather = currentWeather.data
+            }
+            viewModel.isLoadingDataComplete.postValue(true)
+        }
+    }
 }

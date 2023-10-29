@@ -96,23 +96,19 @@ class DetailWeatherScreen:
             tvCity.text = currentWeather.data.name
             tvCurrentTemp.text = getString(
                 R.string.current_temp,
-                Standardize.standardizeDegreeCelsius(currentWeather.data.main.temp).toInt()
-                    .toString()
+                Standardize.standardizeDegreeCelsius(currentWeather.data.main.temp)
             )
             tvWeatherStatus.text = currentWeather.data.weather[0].description
             tvHLTemp.text = getString(
                 R.string.high_low_temp,
-                Standardize.standardizeDegreeCelsius(currentWeather.data.main.tempMax).toInt()
-                    .toString(),
-                Standardize.standardizeDegreeCelsius(currentWeather.data.main.tempMin).toInt()
-                    .toString()
+                Standardize.standardizeDegreeCelsius(currentWeather.data.main.tempMax),
+                Standardize.standardizeDegreeCelsius(currentWeather.data.main.tempMin)
             )
             tvHumidity.text = currentWeather.data.main.humidity.toString() + '%'
             tvWind.text = getString(R.string.km_h, currentWeather.data.wind.speed.toString())
             tvFeelsLike.text = getString(
                 R.string.current_temp,
-                Standardize.standardizeDegreeCelsius(currentWeather.data.main.feelsLike).toInt()
-                    .toString()
+                Standardize.standardizeDegreeCelsius(currentWeather.data.main.feelsLike)
             )
             tvVisibility.text = getString(
                 R.string.km,

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mitweather.data.model.Location
 import com.example.mitweather.databinding.LayoutLocationItemBinding
+import com.example.mitweather.utils.Standardize
 
 
 interface OnItemClickListener {
@@ -12,7 +13,7 @@ interface OnItemClickListener {
 }
 
 class LocationAdapter(
-    private val locationItemList: List<Location>,
+    private val locationItemList: MutableList<Location>,
     private val onItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<LocationAdapter.LocationViewHolder>() {
 
@@ -50,8 +51,9 @@ class LocationAdapter(
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
         val location = locationItemList[position]
         holder.locationName.text = location.cityName
-        holder.locationTemp.text = "38\u00B0"
-        holder.locationWeather.text = "Sunny"
+        holder.locationTemp.text =
+            Standardize.standardizeDegreeCelsius(location.currentWeather!!.main.temp)
+        holder.locationWeather.text = location.currentWeather!!.weather[0].description
     }
 
 

@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.example.mitweather.data.repository.local.LocationRepository
 import com.example.mitweather.data.repository.local.LocationRepositoryImpl
-import com.example.mitweather.database.LocationDao
-import com.example.mitweather.database.LocationDatabase
+import com.example.mitweather.room.LocationDao
+import com.example.mitweather.room.LocationDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
